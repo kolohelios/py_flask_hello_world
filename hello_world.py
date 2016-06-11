@@ -10,8 +10,25 @@ def say_hi():
     
 @app.route('/hello/<name>')
 def hi_person(name):
-    return 'Hello {}!'.format(name.title())
+    html = '''
+        <h1>
+            Hello {}!
+        </h1>
+        <p>
+            Here's a picture of a kitten. Awww...
+        </p>
+        <img src="http://placekitten.com/g/200/300">
+    '''
+    return html.format(name.title())
     
+@app.route('/hello/<first>/<last>')
+def jedi_name(first, last):
+    html = '''
+        <p>Your Jedi name is {}{}</p>
+    '''
+    return html.format(last[:3], first[:2])
+
+
 if __name__ == '__main__':
     app.run(host = environ['IP'],
         port = int(environ['PORT']))
